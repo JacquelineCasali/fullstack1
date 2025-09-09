@@ -3,7 +3,7 @@ spring:
     name: tasklist
     version: 1.0.0-SNAPSHOT
   profiles:
-    active: ${PROFILE:dev}  # Usa "dev" como padr√£o se n√£o passar nada
+    active: ${PROFILE:prod}  # Usa "dev" como padr„o se n„o passar nada
 
 management:
   endpoints:
