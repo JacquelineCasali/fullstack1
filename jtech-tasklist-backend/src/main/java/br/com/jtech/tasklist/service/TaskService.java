@@ -20,13 +20,15 @@ public List<Task> findAll(){
 
     public Task findById(Long id){
         return taskRepository.findById(id)
-                .orElseThrow(() -> new TarefaNaoEncontradaException("Tarefa não encontrado!"));
+                .orElseThrow(() -> new TarefaNaoEncontradaException("Tarefa com o id: " + id + " não foi encontrado!"));
 
     }
     public Task create(Task task){
-        if (taskRepository.existsByTituloAndStatus(task.getTitulo(), "pendente")) {
+    task.setStatus("pendente");
+
+        if (taskRepository.existsByTitleAndStatus(task.getTitle(), "pendente")) {
             throw new RegraNegocioException(
-              String.format("Já existe uma tarefa com o título '%s' em status pendente.",task.getTitulo())
+              String.format("Já existe uma tarefa com o título '%s' em status pendente.",task.getTitle())
             );
 
         }
@@ -34,8 +36,8 @@ public List<Task> findAll(){
     }
     public Task update(Long id, Task updatedTask){
         Task task = taskRepository.findById(id).orElseThrow(() -> new TarefaNaoEncontradaException("Tarefa não encontrada com o ID: " + id));
-    task.setTitulo(updatedTask.getTitulo());
-    task.setDescricao(updatedTask.getDescricao());
+    task.setTitle(updatedTask.getTitle());
+    task.setDescription(updatedTask.getDescription());
     task.setStatus(updatedTask.getStatus());
     return taskRepository.save(task);
 

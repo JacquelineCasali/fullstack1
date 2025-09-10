@@ -25,18 +25,30 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(Map.of("erros", mensagens));
     }
 
-    @ExceptionHandler({
-            TarefaNaoEncontradaException.class,
-            RegraNegocioException.class,
+//    @ExceptionHandler({
+//            TarefaNaoEncontradaException.class,
+//            RegraNegocioException.class,
+//
+//    })
+//    public ResponseEntity<?> handlePersonalizadas(RuntimeException ex) {
+//        return ResponseEntity.badRequest().body(Map.of("erros", List.of(ex.getMessage())));
+//    }
 
-    })
-    public ResponseEntity<?> handlePersonalizadas(RuntimeException ex) {
-        return ResponseEntity.badRequest().body(Map.of("mensagem", List.of(ex.getMessage())));
+    @ExceptionHandler(TarefaNaoEncontradaException.class)
+    public ResponseEntity<?> handleTarefaNaoEncontrada(TarefaNaoEncontradaException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Map.of("erros", List.of(ex.getMessage())));
+    }
+
+    @ExceptionHandler(RegraNegocioException.class)
+    public ResponseEntity<?> handleRegraNegocio(RegraNegocioException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(Map.of("erros", List.of(ex.getMessage())));
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleOutras(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(Map.of("mesagem", List.of("Erro interno: " + ex.getMessage())));
+                .body(Map.of("mensagem", List.of("Erro interno: " + ex.getMessage())));
     }
 }

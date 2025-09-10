@@ -1,40 +1,30 @@
 package br.com.jtech.tasklist.domain;
 
 import jakarta.persistence.*;
-
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.CreationTimestamp;
-
 import java.time.LocalDateTime;
-
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Data;
 @Entity
 @Data
+@Table(name = "tasks")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-
-
-    @Column(length = 50)
-    private String titulo;
-    private String descricao;
-
-    private String status; // ex: pendente, concluída
-
+    private Long id;
+    @NotBlank(message = "O título é obrigatório e não pode estar vazio.")
+    @Size(min = 5, max = 100, message = "O título deve ter entre 5 e 100 caracteres.")
+    @Column(nullable = false)
+    private String title;
+    private String description;
+    @Column(nullable = false)
+    private String status;
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-
-
-    public void setTitulos (String titulo) throws Exception {
-        if (titulo.length() > 50) {
-            throw new Exception("O campo titulo deve conter no máximo 50 caracteres");
-        }
-        this.titulo = titulo;
-    }
 
 }

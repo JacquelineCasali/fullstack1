@@ -7,9 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Map;
+
 
 @RestController
 @RequestMapping("/tasks")
@@ -17,12 +16,10 @@ public class TaskController {
 
     @Autowired
     private TaskService taskService;
-
     @PostMapping
     public ResponseEntity<Task> create(@RequestBody @Valid Task task) {
             Task created = this.taskService.create(task);
             return ResponseEntity.status(HttpStatus.CREATED).body(created);
-
         }
      @GetMapping
     public List<Task> findAll(){
@@ -42,7 +39,6 @@ public class TaskController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         taskService.delete(id);
         return ResponseEntity.noContent().build();
-
     }
     }
 

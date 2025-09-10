@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/fullstack1.iml" filepath="$PROJECT_DIR$/.idea/fullstack1.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/tasklist.main.iml" filepath="$PROJECT_DIR$/.idea/modules/tasklist.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tasklist.test.iml" filepath="$PROJECT_DIR$/.idea/modules/tasklist.test.iml" />
     </modules>
   </component>
 </project>
