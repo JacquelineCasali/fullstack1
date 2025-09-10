@@ -1,6 +1,8 @@
 package br.com.jtech.tasklist.service;
 
+import br.com.jtech.tasklist.domain.Status;
 import br.com.jtech.tasklist.domain.Task;
+import br.com.jtech.tasklist.dto.TaskDTO;
 import br.com.jtech.tasklist.exceptions.RegraNegocioException;
 import br.com.jtech.tasklist.exceptions.TarefaNaoEncontradaException;
 import br.com.jtech.tasklist.repository.TaskRepository;
@@ -23,22 +25,30 @@ public List<Task> findAll(){
                 .orElseThrow(() -> new TarefaNaoEncontradaException("Tarefa com o id: " + id + " não foi encontrado!"));
 
     }
-    public Task create(Task task){
-    task.setStatus("pendente");
-
-        if (taskRepository.existsByTitleAndStatus(task.getTitle(), "pendente")) {
+    public Task create(TaskDTO taskDTO){
+        if (taskRepository.existsByTitleAndStatus(taskDTO.getTitle(), Status.PENDENTE)) {
             throw new RegraNegocioException(
-              String.format("Já existe uma tarefa com o título '%s' em status pendente.",task.getTitle())
+              String.format("Já existe uma tarefa com o título '%s' em status pendente.",taskDTO.getTitle())
             );
-
         }
+        Task task = new Task();
+        task.setTitle(taskDTO.getTitle());
+        task.setDescription(taskDTO.getDescription());
+        task.setStatus(Status.from(taskDTO.getStatus()));
         return taskRepository.save(task);
     }
-    public Task update(Long id, Task updatedTask){
+    public Task update(Long id, TaskDTO taskDTO){
         Task task = taskRepository.findById(id).orElseThrow(() -> new TarefaNaoEncontradaException("Tarefa não encontrada com o ID: " + id));
-    task.setTitle(updatedTask.getTitle());
-    task.setDescription(updatedTask.getDescription());
-    task.setStatus(updatedTask.getStatus());
+        // Verifica se existe outra tarefa pendente com o mesmo título
+        boolean exists = taskRepository.existsByTitleAndStatusAndIdNot(
+                taskDTO.getTitle(), Status.PENDENTE, id);
+        if (exists) {
+            throw new RegraNegocioException(
+                    "Já existe uma outra tarefa pendente com esse título.");
+        }
+    task.setTitle(taskDTO.getTitle());
+    task.setDescription(taskDTO.getDescription());
+    task.setStatus(Status.from(taskDTO.getStatus()));
     return taskRepository.save(task);
 
     }

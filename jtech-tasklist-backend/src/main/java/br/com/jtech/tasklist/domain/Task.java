@@ -21,8 +21,9 @@ public class Task {
     @Column(nullable = false)
     private String title;
     private String description;
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String status;
+    private Status status;
     @CreationTimestamp
     private LocalDateTime createdAt;
 
