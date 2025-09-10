@@ -87,19 +87,19 @@ Para rodar os testes, execute:
 
 ## Decisões Técnicas
 
--- H2 para testes: Facilita o desenvolvimento e testes locais por ser um banco em memória, eliminando a necessidade de configuração adicional.
--- PostgreSQL para produção: Banco relacional robusto e amplamente usado em aplicações reais.
--- Spring Boot: Framework rápido e confiável para APIs REST, com suporte integrado a JPA, segurança, e validação.
--- Lombok: Reduz boilerplate de código para getters/setters, facilitando a manutenção.
--- Hibernate Validator: Para garantir regras de validação nos dados de entrada com anotações.
--- Springdoc OpenAPI: Geração automática da documentação Swagger, facilitando testes e consumo da API.
+- H2 para testes: Facilita o desenvolvimento e testes locais por ser um banco em memória, eliminando a necessidade de configuração adicional.
+- PostgreSQL para produção: Banco relacional robusto e amplamente usado em aplicações reais.
+- Spring Boot: Framework rápido e confiável para APIs REST, com suporte integrado a JPA, segurança, e validação.
+- Lombok: Reduz boilerplate de código para getters/setters, facilitando a manutenção.
+- Hibernate Validator: Para garantir regras de validação nos dados de entrada com anotações.
+- Springdoc OpenAPI: Geração automática da documentação Swagger, facilitando testes e consumo da API.
 
 ## Melhorias Futuras
--- Implementar autenticação e autorização (ex: JWT).
--- Criar endpoints paginados para listagem de tarefas.
--- Adicionar filtros e busca avançada (por status, título, etc).
--- Suporte a upload de arquivos (ex: anexos às tarefas).
--- Monitoramento e métricas usando Spring Boot Actuator.
+- Implementar autenticação e autorização (ex: JWT).
+- Criar endpoints paginados para listagem de tarefas.
+- Adicionar filtros e busca avançada (por status, título, etc).
+- Suporte a upload de arquivos (ex: anexos às tarefas).
+- Monitoramento e métricas usando Spring Boot Actuator.
 
 # Licença
 Projeto desenvolvido por Jacqueline Casali.
