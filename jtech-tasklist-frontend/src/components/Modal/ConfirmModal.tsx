@@ -1,0 +1,24 @@
+interface Props {
+  open: boolean;
+  title?: string;
+  message?: string;
+  onConfirm: () => void;
+  onCancel: () => void;
+}
+
+export default function ConfirmModal({ open, title = "Confirmação", message, onConfirm, onCancel }: Props) {
+  if (!open) return null;
+
+  return (
+    <div className="modal-backdrop" role="dialog" aria-modal="true">
+      <div className="modal">
+        <h3 className="modal-title">{title}</h3>
+        <p className="modal-message">{message ?? "Tem certeza que deseja continuar?"}</p>
+        <div className="modal-actions">
+          <button className="btn" onClick={onCancel}>Cancelar</button>
+          <button className="btn danger" onClick={onConfirm}>Sim, apagar</button>
+        </div>
+      </div>
+    </div>
+  );
+}

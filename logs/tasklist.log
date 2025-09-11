@@ -390,3 +390,4 @@ Caused by: java.lang.ClassNotFoundException: br.com.jtech.tasklist.service.TaskS
 2025-09-11T07:27:46.453-03:00  INFO 26480 --- [tasklist] [restartedMain] br.com.jtech.tasklist.StartTasklist      : Started StartTasklist in 28.95 seconds (process running for 36.843)
 2025-09-11T07:29:27.862-03:00  INFO 26480 --- [tasklist] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2025-09-11T07:29:27.863-03:00  INFO 26480 --- [tasklist] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-11T07:29:27.868-03:00  INFO 26480 --- [tasklist] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
