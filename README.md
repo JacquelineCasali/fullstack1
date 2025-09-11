@@ -6,10 +6,12 @@ Aplicação fullstack para gerenciamento de tarefas, onde é possível **adicion
 ## 🚀 Imagem do Projeto
 
 ### 🖥️ Frontend
-![Frontend](image.png)
+<img width="869" height="880" alt="Captura de tela 2025-09-11 104953" src="https://github.com/user-attachments/assets/ce42ad28-3e77-4c93-bc63-794a42886cf0" />
+
 
 ### 🛠️ Backend
-![Backend](img.png)
+
+<img width="1684" height="711" alt="Captura de tela 2025-09-10 113348" src="https://github.com/user-attachments/assets/daead5ed-f659-42c7-a2ba-62cf8b88ec78" />
 
 ## 🚀 Tecnologias
 
