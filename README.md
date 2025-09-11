@@ -1,62 +1,102 @@
-# Desafio Técnico Fullstack 1 - JTech
+# 📋 Lista de Tarefas (To-Do List)
 
-## API RESTful para Gerenciamento de Tarefas
+Aplicação fullstack para gerenciamento de tarefas, onde é possível **adicionar, editar, concluir e excluir tarefas**. As tarefas concluídas aparecem riscadas e ao final da lista, enquanto as pendentes aparecem primeiro.
 
-### Contextualização e Objetivo
 
-A **JTech** busca identificar profissionais que demonstrem sólido conhecimento nos fundamentos do desenvolvimento backend. Este desafio técnico foi elaborado para avaliar suas competências na construção de APIs RESTful utilizando Java e Spring Boot.
+## 🚀 Imagem do Projeto
 
-**Objetivo:** Desenvolver uma API completa para gerenciamento de tarefas (TODO List), aplicando boas práticas de desenvolvimento, arquitetura limpa e documentação técnica de qualidade.
+### 🖥️ Frontend
+![Frontend](image.png)
 
-## Especificações Técnicas
+### 🛠️ Backend
+![Backend](img.png)
 
-### Requisitos Funcionais
+## 🚀 Tecnologias
 
-1. **Criar Tarefa**: Endpoint `POST /tasks` para adicionar uma nova tarefa. A tarefa deve conter título, descrição e status (ex: "pendente", "concluída").
-2. **Listar Tarefas**: Endpoint `GET /tasks` para retornar todas as tarefas cadastradas.
-3. **Buscar Tarefa por ID**: Endpoint `GET /tasks/{id}` para obter os detalhes de uma tarefa específica.
-4. **Atualizar Tarefa**: Endpoint `PUT /tasks/{id}` para atualizar o título, a descrição ou o status de uma tarefa.
-5. **Deletar Tarefa**: Endpoint `DELETE /tasks/{id}` para remover uma tarefa do sistema.
+### Frontend
+- [React.js]
+- [Vite]
+- [Axios]
 
-### Requisitos Não Funcionais
+### Backend
+- Java 17
+- Spring Boot 3
+- Spring Data JPA
+- Hibernate Validator
+- PostgreSQL ou H2 (ambiente de testes)
+- Lombok
+- JUnit 5 + Mockito
+- Swagger (Springdoc OpenAPI)
+- Gradle
 
-1. **Persistência de Dados**: As tarefas devem ser armazenadas em banco de dados. Recomenda-se H2 (em memória) para simplificação ou PostgreSQL para demonstrar conhecimento em bancos relacionais.
-2. **Validação de Dados**: Implementar validação robusta das entradas do usuário (ex: título da tarefa obrigatório e não vazio).
-3. **Tratamento de Erros**: A API deve retornar códigos de status HTTP apropriados e mensagens de erro claras (ex: 404 para tarefa não encontrada, 400 para dados inválidos).
+## ⚙️ Instalação e Execução
 
-### Stack Tecnológica Obrigatória
+### 1️⃣ Clonar o Repositório
 
-* **Linguagem**: Java
-* **Framework**: Spring Boot
-* **Persistência**: Spring Data JPA com Hibernate
-* **Banco de Dados**: H2 (em memória) ou PostgreSQL
-* **Testes**: Testes unitários com JUnit/Mockito.
+bash
+git clone https://github.com/JacquelineCasali/fullstack1
+cd fullstack1
 
-## Critérios de Avaliação
+### 2️⃣ Backend
+cd jtech-tasklist-backend
+./gradlew bootRun
 
-* **Qualidade e Organização do Código**: Código limpo, legível e seguindo as convenções do Java.
-* **Aplicação de Boas Práticas**: Utilização de princípios como Clean Code e KISS.
-* **Funcionalidade**: Todos os endpoints devem funcionar conforme especificado.
-* **Testes Automatizados**: Cobertura de testes unitários para as classes de serviço e controllers.
-* **Uso Adequado da Stack**: Configuração correta do Spring Boot, JPA e do banco de dados.
-* **Modelagem de Dados**: Estrutura da entidade `Task` bem definida.
-* **Controle de Versão**: Commits claros e lógicos no Git.
+Acesse: http://localhost:8080
 
-## Expectativa de Entrega
+A API está documentada com Swagger em:
+http://localhost:8080/swagger-ui.html
 
-* **Prazo**: Até 3 dias corridos a partir do recebimento.
-* **Formato**: Entregar o código-fonte em um repositório Git, acompanhado de um `README.md` completo.
+### 3️⃣ Frontend
+cd jtech-tasklist-frontend
+npm install
+npm run dev
+Acesse: http://localhost:5173
 
-### Estrutura Obrigatória do `README.md`
+## 📌 Funcionalidades
 
-1. **Visão Geral do Projeto**: Breve descrição da API e seus objetivos.
-2. **Stack Utilizada**: Lista das tecnologias implementadas.
-3. **Como Rodar Localmente**: Instruções para configurar o ambiente, instalar dependências e iniciar o servidor.
-4. **Como Rodar os Testes**: Comando para executar os testes.
-5. **Estrutura de Pastas**: Explicação da organização do projeto.
-6. **Decisões Técnicas**: Justificativas para as escolhas feitas (ex: por que usou H2 em vez de PostgreSQL).
-7. **Melhorias Futuras**: Sugestões para evoluir a API.
+- ✅ Criar nova tarefa
+- ✅ Editar título e descrição
+- ✅ Marcar como concluída (fica riscada e vai para o final da lista)
+- ✅ Excluir tarefa
+- ✅ Ordenar pendentes primeiro
 
----
+## 🎨 Interface
 
-**Boa sorte! A JTech está ansiosa para conhecer sua solução.**
+- Tarefas pendentes aparecem primeiro
+- Tarefa concluída: destaque em verde
+- Tarefa pendente: destaque em vermelho
+
+## 📖 Regras de Negócio
+
+- Título da tarefa é obrigatório (5 a 100 caracteres)
+- Status é obrigatório: PENDENTE ou CONCLUIDA
+- Não é permitido cadastrar duas tarefas com o mesmo título e status PENDENTE
+
+## 🧪 Testes Automatizados
+
+- Cobertura de regras de negócio no serviço de tarefas
+- Ferramentas: JUnit 5 e Mockito
+- Executar os testes:
+./gradlew test
+
+## 💡 Decisões Técnicas
+
+- ✅ Banco H2: Utilizado localmente por facilitar testes sem necessidade de instalação
+- ✅ PostgreSQL: Banco de produção, mais robusto
+- ✅ Spring Boot: Facilita desenvolvimento de APIs REST com segurança, validação, JPA, etc.
+- ✅ Swagger: Documentação automática para facilitar testes e integração
+- ✅ Lombok: Redução de código repetitivo (getters/setters)
+
+## 🚧 Melhorias Futuras
+
+- ✅ Autenticação e autorização com JWT
+- ✅ Filtros de busca (por título/status)
+- ✅ Paginação dos resultados
+- ✅ Upload de arquivos/anexos
+- ✅ Monitoramento com Spring Boot Actuator
+- ✅ Deploy em ambiente cloud
+
+## 📄 Licença
+
+Projeto desenvolvido por Jacqueline Casali.
+https://www.linkedin.com/in/jaquelinecasali/
