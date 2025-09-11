@@ -1,4 +1,4 @@
-package br.com.jtech.tasklist.sprigdoc;
+package br.com.jtech.tasklist.infra.sprigdoc;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

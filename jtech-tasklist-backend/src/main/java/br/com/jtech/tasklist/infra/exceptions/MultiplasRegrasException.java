@@ -1,4 +1,4 @@
-package br.com.jtech.tasklist.exceptions;
+package br.com.jtech.tasklist.infra.exceptions;
 
 import java.util.List;
 

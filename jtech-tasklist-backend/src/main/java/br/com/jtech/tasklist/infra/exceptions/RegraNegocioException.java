@@ -1,4 +1,4 @@
-package br.com.jtech.tasklist.exceptions;
+package br.com.jtech.tasklist.infra.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

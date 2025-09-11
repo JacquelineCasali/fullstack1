@@ -1,13 +1,16 @@
 
+import Home from "./pages/Home"
 
 
-export default function App() {
 
-   
-  
-    return (
-    <div>ola</div>
-    );
-  
-  
+function App() {
+
+
+  return (
+    <>
+     <Home/>
+    </>
+  )
 }
+
+export default App
