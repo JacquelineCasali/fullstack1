@@ -6,8 +6,11 @@
   --card:#ffffff;
   --muted:#6b7280;
   --primary:#1f6feb;
+   --azul: #0275d8;
   --danger:#e85454;
   --border:#e6e7ea;
+   --gree: #118c4f;
+   --green-escuro: #137333;
   --radius:8px;
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
@@ -32,12 +35,6 @@ body{
   margin:0 auto;
 }
 
-/* Title */
-.title{
-  font-size:24px;
-  font-weight:700;
-  margin-bottom:16px;
-}
 
 /* Form */
 .task-form{
@@ -79,10 +76,6 @@ body{
   padding:12px;
 }
 
-.task-list h2{
-  margin:0 0 12px 0;
-  font-size:18px;
-}
 
 /* Rows */
 ul{list-style:none;padding:0;margin:0}
@@ -136,26 +129,6 @@ ul{list-style:none;padding:0;margin:0}
   gap:8px;
 }
 
-.btn{
-  padding:6px 10px;
-  border-radius:6px;
-  border:1px solid var(--border);
-  background:#fff;
-  cursor:pointer;
-  font-size:13px;
-}
-
-.btn.primary{
-  background:var(--primary);
-  color:white;
-  border-color:transparent;
-}
-
-.btn.danger{
-  background:var(--danger);
-  color:white;
-  border-color:transparent;
-}
 
 /* Inline edit inputs */
 .input-inline{
@@ -214,20 +187,26 @@ ul{list-style:none;padding:0;margin:0}
   gap:8px;
 }
 .muted{color:var(--muted);font-size:13px}
-.error{color:var(--danger);margin-top:8px;font-size:13px}
+.error{color:var(--danger);margin-top:8px;font-size:13px;font-weight: 700}
 
 .badge {
-  display: inline-block;
+  display: flex;
+
+  justify-content: center;
   padding: 4px 10px;
   font-size: 13px;
   font-weight: bold;
   border-radius: 20px;
   margin-top: 6px;
+  min-width: 100px;
+  max-width: 100px; 
+ line-height: 20px;
+      align-items: center;  
 }
 
 .badge-green {
   background-color: #e6f4ea;
-  color: #137333;
+  color:var(--green-escuro);
 }
 
 .badge-red {

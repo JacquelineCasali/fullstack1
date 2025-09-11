@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import api from "../services/api";
+import api from "../../services/api";
+import Button from "../Button/Button";
+import Loading from "../Loading/Loading";
+
+import { getBackendError } from "../../utils/getBackendError";
 
 interface Props {
   onTaskCreated: () => void;
@@ -29,8 +33,8 @@ export default function TaskForm({ onTaskCreated }: Props) {
       setDescription("");
       onTaskCreated();
     } catch (err) {
-      setError("Erro ao criar tarefa");
       console.error(err);
+      setError(getBackendError(err));
     } finally {
       setLoading(false);
     }
@@ -45,9 +49,12 @@ export default function TaskForm({ onTaskCreated }: Props) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <button className="btn primary" type="submit" disabled={loading}>
-          {loading ? "Salvando..." : "Criar"}
-        </button>
+        <Button
+          text={loading ? <Loading type="spinner" /> : "Criar"}
+          theme={"primary"}
+          type="submit"
+          disabled={loading}
+        />
       </div>
       <textarea
         className="textarea"

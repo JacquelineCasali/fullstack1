@@ -1,69 +1,48 @@
-# React + TypeScript + Vite
+## 📋 Lista de Tarefas (To-Do List)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação simples de gerenciamento de tarefas, onde é possível adicionar, editar, concluir e excluir tarefas.
+As tarefas concluídas aparecem riscadas e ao final da lista, enquanto as pendentes aparecem primeiro.
 
-Currently, two official plugins are available:
+## 🚀 Imagem do Projeto 
+![alt text](image.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tecnologias
 
-## Expanding the ESLint configuration
+-Frontend: React.js + Vite
+-Banco de Dados: PostgreSQL (pode ser h2 também)
+-Outros: Axios
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ⚙️ Instalação e Execução
+1️⃣ Clonar o repositório
+git clone https://github.com/JacquelineCasali/fullstack1
+cd jtech-tasklist-frontend
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+O backend sobe em: http://localhost:8080
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+3️⃣ Frontend
+cd frontend
+npm install
+npm run dev
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+O frontend abre em: http://localhost:5173
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+# 📌 Funcionalidades
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+✅ Criar novas tarefas
+✅ Editar título e descrição
+✅ Marcar tarefa como concluída (fica riscada e no final da lista)
+✅ Excluir tarefa
+✅ Ordenar pendentes primeiro
+
+## 🎨 Interface
+
+- As tarefas pendentes aparecem primeiro.
+- Status Concluída → verde
+- Status Pendente → vermelho
+
+## 🛠️ Melhorias Futuras
+
+-Autenticação de usuário
+-Filtros de busca (por título/status)
+-Deploy em produção

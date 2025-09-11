@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
-import api from "../services/api";
-import ConfirmModal from "./Modal/ConfirmModal";
-
+import api from "../../services/api";
+import ConfirmModal from "../Modal/ConfirmModal";
+import Title from "../Title/Title";
+import Button from "../Button/Button";
+import Loading from "../Loading/Loading";
+import { getBackendError } from "../../utils/getBackendError";
+import capitalizeFirstLetter from "../../utils/capitalizeFirstLetter";
 
 export interface Task {
   id: number;
   title: string;
   description?: string;
-  status:  "PENDENTE"|"CONCLUIDA";
+  status: "PENDENTE" | "CONCLUIDA";
 }
 
 interface Props {
@@ -29,12 +33,11 @@ export default function TaskList({ reloadTrigger }: Props) {
     setError(null);
     try {
       const res = await api.get<Task[]>("/tasks");
-  const ordered = res.data.sort((a, b) => {
-  if (a.status === b.status) return a.id - b.id;
-  return a.status === "PENDENTE" ? -1 : 1;
-});
-    setTasks(ordered);
-    
+      const ordered = res.data.sort((a, b) => {
+        if (a.status === b.status) return a.id - b.id;
+        return a.status === "PENDENTE" ? -1 : 1;
+      });
+      setTasks(ordered);
     } catch (err) {
       console.error(err);
       setError("Erro ao carregar tarefas");
@@ -61,38 +64,44 @@ export default function TaskList({ reloadTrigger }: Props) {
   }
 
   async function saveEdit(id: number) {
-    if (!editTitle.trim()) return;
+    if (!editTitle.trim()) {
+      setError("O título é obrigatório.");
+      return;
+    }
+    setLoading(true);
+    setError(null);
     try {
       await api.put(`/tasks/${id}`, {
         title: editTitle.trim(),
         description: editDescription.trim(),
-        // nota: se o backend exigir o campo status, preservamos o atual:
         status: tasks.find((t) => t.id === id)?.status ?? "pendente",
       });
       await loadTasks();
       cancelEdit();
     } catch (err) {
       console.error(err);
-      setError("Erro ao salvar edição");
+      setError(getBackendError(err));
+    } finally {
+      setLoading(false);
     }
   }
 
   async function toggleStatus(task: Task) {
     try {
-    const newStatus = task.status === "PENDENTE" ? "CONCLUIDA" : "PENDENTE";
+      const newStatus = task.status === "PENDENTE" ? "CONCLUIDA" : "PENDENTE";
       await api.put(`/tasks/${task.id}`, { ...task, status: newStatus });
       await loadTasks();
     } catch (err) {
       console.error(err);
-      setError("Erro ao atualizar status");
+      setError(getBackendError(err));
     }
   }
-function renderStatus(status: Task["status"]) {
-  if (status === "CONCLUIDA") {
-    return <span className="badge badge-green">Concluída</span>;
+  function renderStatus(status: Task["status"]) {
+    if (status === "CONCLUIDA") {
+      return <span className="badge badge-green">Concluída</span>;
+    }
+    return <span className="badge badge-red">Pendente</span>;
   }
-  return <span className="badge badge-red">Pendente</span>;
-}
   function confirmDelete(id: number) {
     setToDeleteId(id);
     setConfirmOpen(true);
@@ -107,14 +116,15 @@ function renderStatus(status: Task["status"]) {
       await loadTasks();
     } catch (err) {
       console.error(err);
-      setError("Erro ao deletar tarefa");
+      setError(getBackendError(err));
     }
   }
 
   return (
     <div className="task-list">
-      <h2>Lista de Tarefas</h2>
-      {loading && <div className="muted">Carregando...</div>}
+      <Title text={`Lista de Tarefas`} theme="h2" />
+      {loading && <Loading type="text" />}
+
       {error && <div className="error">{error}</div>}
       <ul>
         {tasks.map((task) => (
@@ -122,7 +132,7 @@ function renderStatus(status: Task["status"]) {
             <div className="task-main">
               <input
                 type="checkbox"
-                  checked={task.status === "CONCLUIDA"}
+                checked={task.status === "CONCLUIDA"}
                 onChange={() => toggleStatus(task)}
                 aria-label={`Marcar ${task.title}`}
               />
@@ -142,11 +152,17 @@ function renderStatus(status: Task["status"]) {
                 </div>
               ) : (
                 <div className="task-info">
-                   <div className={`task-title ${task.status === "CONCLUIDA" ? "done" : ""}`}>
-          {task.title}
-        </div>
-                  {task.description && <div className="task-desc">{task.description}</div>}
-                      {renderStatus(task.status)}
+                  <div
+                    className={`task-title ${
+                      task.status === "CONCLUIDA" ? "done" : ""
+                    }`}
+                  >
+                   {capitalizeFirstLetter(task.title)}
+                  </div>
+                  {task.description && (
+                    <div className="task-desc">{capitalizeFirstLetter(task.description)}</div>
+                  )}
+                  {renderStatus(task.status)}
                 </div>
               )}
             </div>
@@ -154,13 +170,31 @@ function renderStatus(status: Task["status"]) {
             <div className="task-actions">
               {editingId === task.id ? (
                 <>
-                  <button className="btn" onClick={() => saveEdit(task.id)}>Salvar</button>
-                  <button className="btn" onClick={cancelEdit}>Cancelar</button>
+                  <Button
+                    text={loading ? <Loading type="spinner" /> : "Salvar"}
+                    theme={"green"}
+                    onClick={() => saveEdit(task.id)}
+                    disabled={loading}
+                  />
+                  <Button
+                    text={"Cancelar"}
+                    theme={"btn"}
+                    onClick={cancelEdit}
+                  />
                 </>
               ) : (
                 <>
-                  <button className="btn" onClick={() => startEdit(task)}>Editar</button>
-                  <button className="btn danger" onClick={() => confirmDelete(task.id)}>Excluir</button>
+                  <Button
+                    text={"Editar"}
+                    theme={"btn"}
+                    onClick={() => startEdit(task)}
+                  />
+                  <Button
+                    text={loading ? <Loading type="spinner" /> : "Excluir"}
+                    theme={"danger"}
+                    onClick={() => confirmDelete(task.id)}
+                    disabled={loading}
+                  />
                 </>
               )}
             </div>
@@ -173,7 +207,10 @@ function renderStatus(status: Task["status"]) {
         title="Apagar tarefa"
         message="Tem certeza que deseja apagar esta tarefa? Esta ação não pode ser desfeita."
         onConfirm={doDelete}
-        onCancel={() => { setConfirmOpen(false); setToDeleteId(null); }}
+        onCancel={() => {
+          setConfirmOpen(false);
+          setToDeleteId(null);
+        }}
       />
     </div>
   );

@@ -1,0 +1,45 @@
+.btn{
+  padding:6px 10px;
+  border-radius:6px;
+  border:1px solid var(--border);
+  background:#fff;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.primary{
+  background:var(--primary);
+  color:white;
+  border-color:transparent;
+}
+
+
+.primary:active,
+.primary:hover,
+.green:active
+.green:hover
+ {
+  background: var(--azul);
+  color: var(--amarelo);
+  box-shadow: rgb(0 0 0 / 20%) 0px 28px 45px;
+}
+
+.green{
+  background:var(--gree);
+  color:white;
+  border-color:transparent;
+}
+.danger{
+  background:var(--danger);
+  color:white;
+  border-color:transparent;
+}
+.primary:active,
+.primary:hover,
+.green:active
+.green:hover
+ {
+  background: var(--azul);
+  color: var(--amarelo);
+  box-shadow: rgb(0 0 0 / 20%) 0px 28px 45px;
+}
